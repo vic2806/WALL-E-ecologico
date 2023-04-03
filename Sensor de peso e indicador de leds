@@ -1,0 +1,58 @@
+//Definir pines de los LEDS y del sensor
+const int sensorPin = A0;
+const int ledPin1 = 2;
+const int ledPin2 = 3;
+const int ledPin3 = 4;
+
+//Definir umbrales de peso para cada recipiente (ajusta los valores según sea necesario)
+const int threshold1 = 10; // Recipiente 1: si el peso es menor o igual a 10, el recipiente está vacío.
+const int threshold2 = 15; // Recipiente 2: si el peso es menor o igual a 15, el recipiente está vacío.
+const int threshold3 = 18; // Recipiente 3: si el peso es menor o igual a 18, el recipiente está vacío.
+
+void setup() {
+  // Configurar pines de salida para los LEDs
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  
+  // Configurar puerto analógico para el sensor
+  pinMode(sensorPin, INPUT);
+  
+  // Inicializar la comunicación serie (opcional, pero útil para depurar)
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Leer el valor del sensor
+  int weight = analogRead(sensorPin);
+  
+  // Convertir el valor del sensor en un peso en kilogramos
+  float kg = map(weight, 0, 1023, 0, 10);
+  
+  // Imprimir el peso en la consola serial (opcional, pero útil para depurar)
+  Serial.print("Peso: ");
+  Serial.print(kg);
+  Serial.println(" kg");
+  
+  // Comprobar si cada recipiente está lleno o vacío y encender/apagar el LED correspondiente
+  if (kg <= threshold1) {
+    digitalWrite(ledPin1, HIGH); // Encender el LED 1
+  } else {
+    digitalWrite(ledPin1, LOW); // Apagar el LED 1
+  }
+  
+  if (kg <= threshold2) {
+    digitalWrite(ledPin2, HIGH); // Encender el LED 2
+  } else {
+    digitalWrite(ledPin2, LOW); // Apagar el LED 2
+  }
+  
+  if (kg <= threshold3) {
+    digitalWrite(ledPin3, HIGH); // Encender el LED 3
+  } else {
+    digitalWrite(ledPin3, LOW); // Apagar el LED 3
+  }
+  
+  // Esperar un breve período de tiempo antes de volver a leer el sensor
+  delay(100);
+}
