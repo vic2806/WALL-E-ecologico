@@ -1,4 +1,4 @@
-
+// El archivo al ser de arduino debe ser .hex
 const int boton1Pin = 2;
 const int boton2Pin = 3;
 const int boton3Pin = 4;
