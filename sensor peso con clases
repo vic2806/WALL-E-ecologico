@@ -12,7 +12,7 @@ class sensorPeso {
       int peso = analogRead(sensorPin);
       return map(weight, 0, 1023, 0, 10);
     }
-}
+};
 
 class LED {
   private:
