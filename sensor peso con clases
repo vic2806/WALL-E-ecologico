@@ -1,0 +1,73 @@
+class sensorPeso {
+  private:
+    int sensorPin;
+    
+  public:
+    sensorPeso(int pin) {
+      sensorPin = pin;
+      pinMode(sensorPin, INPUT);
+    }
+    
+    float getPeso() {
+      int peso = analogRead(sensorPin);
+      return map(weight, 0, 1023, 0, 10);
+    }
+}
+
+class LED {
+  private:
+    int ledPin;
+    
+  public:
+    LED(int pin) {
+      ledPin = pin;
+      pinMode(ledPin, OUTPUT);
+    }
+    
+    void turnOn() {
+      digitalWrite(ledPin, HIGH);
+    }
+    
+    void turnOff() {
+      digitalWrite(ledPin, LOW);
+    }
+};
+
+class caneca {
+  private:
+    WeightSensor sensor;
+    LED led;
+    float threshold;
+    
+  public:
+    Caneca(int sensorPin, int ledPin, float thresholdValue) :
+      sensor(sensorPin),
+      led(ledPin),
+      threshold(thresholdValue) {}
+      
+    void updateLED() {
+      float weight = sensor.getWeight();
+      
+      if (weight <= threshold) {
+        led.turnOn();
+      } else {
+        led.turnOff();
+      }
+    }
+};
+
+Container caneca1(A0, 2, 10);
+Container caneca2(A1, 3, 15);
+Container caneca3(A2, 4, 18);
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  container1.updateLED();
+  container2.updateLED();
+  container3.updateLED();
+  
+  delay(100);
+}
