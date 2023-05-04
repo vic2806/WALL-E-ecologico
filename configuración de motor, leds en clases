@@ -1,0 +1,100 @@
+
+const int boton1Pin = 2;
+const int boton2Pin = 3;
+const int boton3Pin = 4;
+const int boton4Pin = 5;
+
+const int ledAzulPin = 6;
+const int ledVerdePin = 7;
+const int ledAmarilloPin = 8;
+
+const int motorIzquierdoPin1 = 9;
+const int motorIzquierdoPin2 = 10;
+const int motorDerechoPin1 = 11;
+const int motorDerechoPin2 = 12;
+
+const int compuerta1Pin = 13;
+const int compuerta2Pin = A0;
+const int compuerta3Pin = A1;
+
+class Boton {
+  private:
+    int _pin;
+  
+  public:
+    Boton(int pin) {
+      _pin = pin;
+      pinMode(_pin, INPUT);
+    }
+  
+    int leer() {
+      return digitalRead(_pin);
+    }
+};
+
+class Led {
+  private:
+    int _pin;
+  
+  public:
+    Led(int pin) {
+      _pin = pin;
+      pinMode(_pin, OUTPUT);
+    }
+  
+    void encender() {
+      digitalWrite(_pin, HIGH);
+    }
+  
+    void apagar() {
+      digitalWrite(_pin, LOW);
+    }
+};
+
+class Motor {
+  private:
+    int _pin1;
+    int _pin2;
+  
+  public:
+    Motor(int pin1, int pin2) {
+      _pin1 = pin1;
+      _pin2 = pin2;
+      pinMode(_pin1, OUTPUT);
+      pinMode(_pin2, OUTPUT);
+    }
+  
+    void avanzar() {
+      digitalWrite(_pin1, HIGH);
+      digitalWrite(_pin2, LOW);
+    }
+  
+    void retroceder() {
+      digitalWrite(_pin1, LOW);
+      digitalWrite(_pin2, HIGH);
+    }
+  
+    void detener() {
+      digitalWrite(_pin1, LOW);
+      digitalWrite(_pin2, LOW);
+    }
+};
+
+class Compuerta {
+  private:
+    int _pin;
+  
+  public:
+    Compuerta(int pin) {
+      _pin = pin;
+      pinMode(_pin, OUTPUT);
+    }
+  
+    void abrir() {
+      digitalWrite(_pin, HIGH);
+    }
+  
+    void cerrar() {
+      digitalWrite(_pin, LOW);
+    }
+};
