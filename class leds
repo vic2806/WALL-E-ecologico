@@ -1,0 +1,22 @@
+const int ledAzulPin = 6;
+const int ledVerdePin = 7;
+const int ledAmarilloPin = 8;
+
+class Led {
+  private:
+    int _pin;
+  
+  public:
+    Led(int pin) {
+      _pin = pin;
+      pinMode(_pin, OUTPUT);
+    }
+  
+    void encender() {
+      digitalWrite(_pin, HIGH);
+    }
+  
+    void apagar() {
+      digitalWrite(_pin, LOW);
+    }
+};
