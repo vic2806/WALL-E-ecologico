@@ -1,0 +1,15 @@
+class PesoSensor {
+  private:
+    int sensorPin;
+    
+  public:
+    PesoSensor(int pin) {
+      sensorPin = pin;
+      pinMode(sensorPin, INPUT);
+    }
+    
+    float getPeso() {
+      int Peso = analogRead(sensorPin);
+      return map(peso, 0, 1023, 0, 10);
+    }
+};
